@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Strum - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000130;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            margin: 0;
+            padding: 80px 0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 400px;
+            margin: 0 auto;
+        }
+        h2, h3 { color: #333; margin-top: 0; }
+        .brand { color: #e94560; letter-spacing: 2px; }
+        hr { border: 1px solid #ddd; margin: 20px 0; }
+        label { font-weight: bold; }
+        input {
+            width: 95%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #e94560;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover { background-color: #c73650; }
+        footer { text-align: center; font-size: 12px; color: #666; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2 class="brand">Strum</h2>
+        <h3>Customer Login</h3>
+        <p style="color:#666; font-size:13px;">Your home for guitars, keys, drums &amp; more.</p>
+
+        <hr>
+
+        <form onsubmit="return validateLogin(event)">
+            <label>Email :</label><br>
+            <input type="email" id="loginEmail" placeholder="Enter Email" required><br>
+
+            <label>Password :</label><br>
+            <input type="password" id="loginPassword" placeholder="Enter Password" required><br>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <hr>
+
+        <footer>
+            <p>New to Strum? <a href="register.html">Create an account</a></p>
+            <p>&copy; 2026 Strum Music Store</p>
+        </footer>
+    </div>
+
+    <script>
+        async function validateLogin(event) {
+            if (event) event.preventDefault();
+
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value;
+
+            if (!email || !password) {
+                alert("All fields must be filled out!");
+                return false;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    sessionStorage.setItem("customerName", result.customer.name);
+                    sessionStorage.setItem("savedEmail", result.customer.email);
+                    sessionStorage.setItem("customerCity", result.customer.city);
+                    sessionStorage.setItem("customerLevel", result.customer.level);
+
+                    window.location.href = "store.html";
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Could not connect to the server. Make sure server.js is running!");
+            }
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>

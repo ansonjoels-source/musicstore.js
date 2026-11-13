@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Strum - Music Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #000130;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        header {
+            display: block;
+            color: white;
+            text-align: center;
+            font-size: 50px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+        header small { display: block; font-size: 16px; margin-top: 5px; }
+
+        nav { background-color: gray; text-align: center; padding: 10px 0; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 20px;
+        }
+        nav a:hover { color: #e94560; }
+
+        .container { margin-top: 20px; margin-bottom: 20px; }
+        .container {
+            width: 960px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        h2, h3, h4 { color: #333; margin-top: 0; }
+        .brand { color: #e94560; letter-spacing: 2px; }
+        hr { border: 1px solid #ddd; margin: 15px 0; }
+
+        .topbar { display: flex; justify-content: space-between; align-items: center; }
+        .hero {
+            background-color: #000130;
+            color: #fff;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .hero h2 { color: #fff; font-size: 28px; }
+
+        .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .feature-flex, .product-flex, .brand-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .feature-item {
+            flex: 1 1 200px;
+            background: #fff;
+            border: 1px solid #f3c1ca;
+            border-radius: 4px;
+            padding: 12px;
+            text-align: center;
+        }
+        .feature-item .icon { font-size: 28px; }
+        .feature-item h4 { margin: 6px 0; color: #e94560; }
+        .feature-item p { font-size: 13px; color: #555; margin: 0; }
+
+        .brand-chip {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-weight: bold;
+            color: #16213e;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            flex: 1 1 200px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-card .emoji { font-size: 48px; }
+        .product-card h4 { color: #16213e; margin: 8px 0 4px; }
+        .product-card .maker { color: #888; font-size: 12px; }
+        .price { color: #e94560; font-weight: bold; font-size: 18px; margin: 8px 0; }
+        .emi { font-size: 11px; color: #28a745; margin-bottom: 8px; }
+
+        select { padding: 5px; margin-top: 5px; }
+        button {
+            background-color: #e94560;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover { background-color: #c73650; }
+        .cart-btn { background-color: #16213e; }
+        .cart-btn:hover { background-color: #0f1626; }
+    </style>
+</head>
+<body>
+
+    <header>
+        Strum
+        <small>Online Music Shopping Website</small>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#product">Product</a>
+    </nav>
+
+    <div class="container" id="home">
+        <div class="topbar">
+            <h2 class="brand">Strum</h2>
+            <div>
+                <span>Hi, <strong id="displayName">Guest</strong> (<span id="displayCity">-</span>)</span>
+                &nbsp;
+                <button type="button" class="cart-btn" onclick="showCart()">Cart (<span id="cartCount">0</span>)</button>
+                <a href="login.html"><button type="button" style="background-color:#dc3545;">Logout</button></a>
+            </div>
+        </div>
+        <hr>
+
+        <div class="hero">
+            <h2>Find the sound that's yours.</h2>
+            <p>Guitars, keyboards, drums and more from the world's best instrument brands, delivered to your door.</p>
+            <p id="levelMsg"></p>
+        </div>
+
+        <!-- Features -->
+        <div class="card">
+            <h3>Why Shop at Strum?</h3>
+            <div class="feature-flex">
+                <div class="feature-item"><div class="icon">🚚</div><h4>Free Shipping</h4><p>On every order above ₹2,999, across India.</p></div>
+                <div class="feature-item"><div class="icon">🔁</div><h4>30-Day Returns</h4><p>Try it at home. Not feeling it? Send it back.</p></div>
+                <div class="feature-item"><div class="icon">🛡️</div><h4>Genuine Warranty</h4><p>100% authentic gear with brand warranty.</p></div>
+                <div class="feature-item"><div class="icon">🎓</div><h4>Free Starter Lessons</h4><p>3 online lessons with every guitar or keyboard.</p></div>
+                <div class="feature-item"><div class="icon">💳</div><h4>No-Cost EMI</h4><p>Split big purchases into easy monthly payments.</p></div>
+                <div class="feature-item"><div class="icon">🎧</div><h4>Expert Support</h4><p>Working musicians help you pick the right gear.</p></div>
+            </div>
+        </div>
+
+        <!-- Brands -->
+        <div class="card">
+            <h3>Top Brands</h3>
+            <div class="brand-flex">
+                <span class="brand-chip">Fender</span>
+                <span class="brand-chip">Yamaha</span>
+                <span class="brand-chip">Gibson</span>
+                <span class="brand-chip">Ibanez</span>
+                <span class="brand-chip">Roland</span>
+                <span class="brand-chip">Casio</span>
+                <span class="brand-chip">Pearl</span>
+                <span class="brand-chip">Korg</span>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="card" id="product">
+            <h3>Shop Instruments</h3>
+            <label for="categoryFilter"><strong>Category:</strong></label>
+            <select id="categoryFilter" onchange="renderProducts()">
+                <option value="All">All</option>
+                <option value="Guitars">Guitars</option>
+                <option value="Keys">Keyboards &amp; Pianos</option>
+                <option value="Drums">Drums &amp; Percussion</option>
+                <option value="Accessories">Accessories</option>
+            </select>
+            <div id="productFlexContainer" class="product-flex"></div>
+        </div>
+
+        <div class="card" id="about">
+            <h3>About Strum</h3>
+            <p>Strum is a music store built by musicians. We stock genuine guitars, keyboards, drums and accessories from the world's top brands, with free lessons and expert help to get you playing sooner.</p>
+        </div>
+
+        <div class="card" id="contact">
+            <h3>Contact Us</h3>
+            <p>Email: support@strum.example<br>Phone: +91 00000 00000<br>Hours: Mon-Sat, 10 AM to 7 PM</p>
+        </div>
+
+        <footer style="text-align:center; font-size:12px; color:#666;">
+            &copy; 2026 Strum Music Store
+        </footer>
+    </div>
+
+    <script>
+    var products = [
+        { name: "Stratocaster Electric Guitar", maker: "Fender",  category: "Guitars", price: 54999, emoji: "🎸" },
+        { name: "F310 Acoustic Guitar",         maker: "Yamaha",  category: "Guitars", price: 11499, emoji: "🎸" },
+        { name: "Les Paul Standard",            maker: "Gibson",  category: "Guitars", price: 189999, emoji: "🎸" },
+        { name: "RG Series Electric Guitar",    maker: "Ibanez",  category: "Guitars", price: 32999, emoji: "🎸" },
+        { name: "PSR-E373 Keyboard",            maker: "Yamaha",  category: "Keys",    price: 21999, emoji: "🎹" },
+        { name: "Go:Keys Portable Synth",       maker: "Roland",  category: "Keys",    price: 24999, emoji: "🎹" },
+        { name: "Privia PX-S1100 Digital Piano",maker: "Casio",   category: "Keys",    price: 49999, emoji: "🎹" },
+        { name: "Export 5-Piece Drum Kit",      maker: "Pearl",   category: "Drums",   price: 64999, emoji: "🥁" },
+        { name: "Cajon Box Drum",               maker: "Pearl",   category: "Drums",   price: 6499,  emoji: "🥁" },
+        { name: "Clip-On Tuner",                maker: "Korg",    category: "Accessories", price: 1299, emoji: "🎵" },
+        { name: "Guitar Strings (Set of 3)",    maker: "Fender",  category: "Accessories", price: 1499, emoji: "🎵" },
+        { name: "Padded Gig Bag",               maker: "Yamaha",  category: "Accessories", price: 2499, emoji: "🎒" }
+    ];
+
+    var cart = [];
+
+    window.onload = function() {
+        var name = sessionStorage.getItem("customerName");
+        var city = sessionStorage.getItem("customerCity");
+        var level = sessionStorage.getItem("customerLevel");
+
+        if (name != null) document.getElementById("displayName").innerText = name;
+        if (city != null && city != "") document.getElementById("displayCity").innerText = city;
+
+        if (level == "Beginner") {
+            document.getElementById("levelMsg").innerText = "New to music? Every guitar and keyboard comes with 3 free starter lessons.";
+        } else if (level == "Advanced") {
+            document.getElementById("levelMsg").innerText = "Pro gear, pro support. Ask about our studio-grade collection.";
+        } else if (level != null) {
+            document.getElementById("levelMsg").innerText = "Ready to level up? Explore our upgrade picks below.";
+        }
+
+        var saved = sessionStorage.getItem("strumCart");
+        if (saved != null) cart = JSON.parse(saved);
+        updateCartCount();
+        renderProducts();
+    }
+
+    function formatPrice(n) {
+        return "₹" + n.toLocaleString("en-IN");
+    }
+
+    function createProductCard(p, index) {
+        var emi = Math.round(p.price / 12);
+        return "<div class='product-card'>" +
+                    "<div class='emoji'>" + p.emoji + "</div>" +
+                    "<h4>" + p.name + "</h4>" +
+                    "<div class='maker'>by " + p.maker + "</div>" +
+                    "<div class='price'>" + formatPrice(p.price) + "</div>" +
+                    "<div class='emi'>or " + formatPrice(emi) + "/mo No-Cost EMI</div>" +
+                    "<button type='button' onclick='addToCart(" + index + ")'>Add to Cart</button>" +
+               "</div>";
+    }
+
+    function renderProducts() {
+        var filter = document.getElementById("categoryFilter").value;
+        var html = "";
+        for (var i = 0; i < products.length; i++) {
+            if (filter == "All" || products[i].category == filter) {
+                html += createProductCard(products[i], i);
+            }
+        }
+        document.getElementById("productFlexContainer").innerHTML = html;
+    }
+
+    function addToCart(index) {
+        cart.push(index);
+        sessionStorage.setItem("strumCart", JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    function updateCartCount() {
+        document.getElementById("cartCount").innerText = cart.length;
+    }
+
+    function showCart() {
+        if (cart.length == 0) {
+            alert("Your cart is empty. Time to find your sound!");
+            return;
+        }
+        var total = 0;
+        var lines = "";
+        for (var i = 0; i < cart.length; i++) {
+            var p = products[cart[i]];
+            total += p.price;
+            lines += "- " + p.name + " (" + formatPrice(p.price) + ")\n";
+        }
+        var shipping = total >= 2999 ? "FREE" : "₹199";
+        alert("Your Cart:\n" + lines + "\nTotal: " + formatPrice(total) + "\nShipping: " + shipping);
+    }
+    </script>
+
+</body>
+</html>
